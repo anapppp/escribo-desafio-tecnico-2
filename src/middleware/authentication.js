@@ -23,7 +23,7 @@ async function authentication(req, res, next) {
         next()
 
     } catch (error) {
-        return res.status(401).json({ mensagem: "Falha na autenticação." })
+        return res.status(401).json({ "mensagem": "mensagem de erro" })
     }
 }
 

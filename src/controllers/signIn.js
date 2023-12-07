@@ -11,26 +11,30 @@ const signIn = async (req, res) => {
             return res.status(400).json({ mensagem: 'Todos os campos são obrigatórios!' })
         }
 
-        const buscarUsuario = await knex(
-            'usuarios').where({ email })
-            .first()
+        const user = await knex(
+            'users').where({ email }).first()
 
-        if (buscarUsuario === undefined) {
-            return res.status(400).json({ mensagem: 'Usuario e/ou senha inávlido' })
+        if (user === undefined) {
+            return res.status(400).json({ mensagem: 'Usuário e/ou senha inválidos' })
         }
 
-        const senhaValida = await bcrypt.compare(senha, buscarUsuario.senha)
-        if (!senhaValida) {
-            return res.status(401).json({ mensagem: 'Usuario e/ou senha inávlido' })
+        const comparePassword = await bcrypt.compare(senha, user.senha)
+        if (!comparePassword) {
+            return res.status(401).json({ mensagem: 'Usuário e/ou senha inválidos' })
         }
 
-        const { senha: _, ...usuarioLogado } = buscarUsuario
-        const token = jwt.sign({ id: buscarUsuario.id }, process.env.JWTPASSWORD, { expiresIn: '8h' })
+        const now = new Date()
+        const userLoggedIn = await knex('users').where({ email }).update({
+            ultimo_login: now
+        }).returning(['id', 'data_criacao', 'data_atualizacao', 'ultimo_login'])
 
-        return res.status(200).json({ usuario: usuarioLogado, token })
+        const token = jwt.sign({ id: user.id }, process.env.JWTPASSWORD, { expiresIn: '30min' })
+
+        return res.status(200).json({ ...userLoggedIn[0], "token": token })
 
     } catch (error) {
-        return res.status(500).json({ mensagem: 'Erro interno no servidor' })
+        console.log(error)
+        return res.status(500).json({ "mensagem": "mensagem de erro" })
     }
 }
 
