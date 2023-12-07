@@ -2,9 +2,9 @@ const jwt = require('jsonwebtoken')
 const knex = require('../conection')
 require('dotenv').config()
 
-const senhaSecreta = process.env.JWTPASSWORD
+const superSecretKey = process.env.JWTPASSWORD
 
-async function autenticacao(req, res, next) {
+async function authentication(req, res, next) {
     const { authorization } = req.headers
     if (!authorization) {
         return res.status(401).json({ mensagem: 'Este usuário não está autorizado.' })
@@ -12,7 +12,7 @@ async function autenticacao(req, res, next) {
 
     try {
         const token = authorization.split(' ')[1]
-        const { id } = jwt.verify(token, senhaSecreta)
+        const { id } = jwt.verify(token, superSecretKey)
         const usuario = await knex('usuarios').where({ id }).first()
         if (!usuario) {
             return res.status(401).json({ mensagem: 'Este usuário não está autorizado.' })
@@ -27,4 +27,4 @@ async function autenticacao(req, res, next) {
     }
 }
 
-module.exports = autenticacao
+module.exports = authentication

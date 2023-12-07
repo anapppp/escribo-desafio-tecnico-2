@@ -1,7 +1,7 @@
-const knex = require('../../conexao')
+const knex = require('../conection')
 const bcrypt = require('bcrypt')
 
-const cadastrarUsuario = async (req, res) => {
+const signUp = async (req, res) => {
     const { nome, email, senha } = req.body
 
     try {
@@ -20,4 +20,4 @@ const cadastrarUsuario = async (req, res) => {
     }
 }
 
-module.exports = cadastrarUsuario
+module.exports = signUp

@@ -1,9 +1,9 @@
 require(`dotenv`).config()
-const knex = require('../../conection')
+const knex = require('../conection')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const login = async (req, res) => {
+const signIn = async (req, res) => {
     const { email, senha } = req.body
 
     try {
@@ -34,4 +34,4 @@ const login = async (req, res) => {
     }
 }
 
-module.exports = login
+module.exports = signIn
