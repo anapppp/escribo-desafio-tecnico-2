@@ -1,16 +1,16 @@
-const knex = require('../conection')
+const knex = require('../conection');
 
 async function email(req, res, next) {
-    const { email } = req.body
+    const { email } = req.body;
     try {
-        const validaEmail = await knex('users').where('email', '=', email).first()
+        const validaEmail = await knex('users').where('email', '=', email).first();
         if (validaEmail) {
-            return res.status(404).json({ mensagem: "E-mail já existente" })
+            return res.status(404).json({ mensagem: "E-mail já existente" });
         }
-        next()
+        next();
     } catch (error) {
-        return res.status(401).json({ "mensagem": "mensagem de erro" })
+        return res.status(401).json({ "mensagem": "mensagem de erro" });
     }
 }
 
-module.exports = { email }
+module.exports = { email };

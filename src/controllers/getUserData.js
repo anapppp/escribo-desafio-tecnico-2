@@ -4,10 +4,10 @@ const getUserData = async (req, res) => {
             "id": req.user.id,
             "nome": req.user.nome,
             "email": req.user.email
-        })
+        });
     } catch (error) {
-        return res.status(500).json({ "mensagem": "mensagem de erro" })
+        return res.status(500).json({ "mensagem": "mensagem de erro" });
     }
-}
+};
 
-module.exports = getUserData
+module.exports = getUserData;

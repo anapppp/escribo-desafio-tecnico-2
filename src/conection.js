@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 const knex = require('knex')({
     client: 'pg',
@@ -10,6 +10,6 @@ const knex = require('knex')({
         database: process.env.DB_NAME,
         ssl: { rejectUnauthorized: false }
     }
-})
+});
 
-module.exports = knex
+module.exports = knex;
