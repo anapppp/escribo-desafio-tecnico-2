@@ -67,3 +67,7 @@ npm install
 
 - Acesse os [endpoints](#endpoints) usando o seguinte link 
   - https://desafio-2-escribo-b0688aa590db.herokuapp.com/
+
+# Insomnia
+
+Para facilitar o acesso a API você pode usar o [Insomnia](https://insomnia.rest/). São dispnibilizados nesse repositório os arquivos [Insomnia - localhost](./Insomnia%20-%20localhost) e [Insomnia - deploy](./Insomnia%20-%20deploy), os quais podem ser importados no Insomnia para acesso respectivamente via localhost e deploy.
