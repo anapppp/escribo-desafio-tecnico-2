@@ -1,24 +1,13 @@
-const knex = require('../conection')
-
-// const detalharUsuario = async (req, res) => {
-//     try {
-//         const [usuario] = await knex.select().from("usuarios").where({ id: req.usuario.id })
-//         if (!usuario) {
-//             return res.status(404).json({ mensagem: 'Usuario não encontrado' })
-//         }
-
-//         return res.status(200).json({
-//             "id": usuario.id,
-//             "nome": usuario.nome,
-//             "email": usuario.email
-//         })
-//     } catch (error) {
-//         return res.status(500).json({ "mensagem": "mensagem de erro" })
-//     }
-// }
-
 const getUserData = async (req, res) => {
-    return res.status(200).json("getUserData")
+    try {
+        return res.status(200).json({
+            "id": req.user.id,
+            "nome": req.user.nome,
+            "email": req.user.email
+        })
+    } catch (error) {
+        return res.status(500).json({ "mensagem": "mensagem de erro" })
+    }
 }
 
 module.exports = getUserData
