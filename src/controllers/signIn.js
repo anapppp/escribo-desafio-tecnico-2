@@ -33,7 +33,6 @@ const signIn = async (req, res) => {
         return res.status(200).json({ ...userLoggedIn[0], "token": token })
 
     } catch (error) {
-        console.log(error)
         return res.status(500).json({ "mensagem": "mensagem de erro" })
     }
 }
